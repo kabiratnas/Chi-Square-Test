@@ -1,0 +1,23 @@
+library(readr)
+library(ggplot2)
+data <- read_csv("C:/Users/kabir/OneDrive/Documents/HR Data.xlsx - HR data.csv")
+correlation <- cor(data$`Years At Company`, data$`Years In Current Role`)
+
+contingency_table <- table(data$`Business Travel`, data$`Job Role`)
+print(contingency_table)
+write_csv(as.data.frame(contingency_table), "contingency_table_HR.csv")
+
+chi_square_test <- chisq.test(contingency_table)
+print(chi_square_test)
+
+
+print(correlation)
+
+ggplot(data, aes(x = `Years At Company`, y = `Years In Current Role`)) +
+  geom_point() +
+  theme_minimal() +
+  labs(title = "Scatter Plot of Years Spent at Company vs Years in Current Role",
+       x = "Years At Company",
+       y = "Years In Current Role")
+
+Terminal Output- check Read me
